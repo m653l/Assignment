@@ -23,7 +23,7 @@ jobs:
       run: dotnet restore ./Assignment.sln
 
     - name: Build
-      run: dotnet build ./Assignment.sln --configuration Relase --no-restore
+      run: dotnet build ./Assignment.sln --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish ./Assignment.sln --configuration Relase --no-build
+      run: dotnet publish ./Assignment.sln --configuration Release --no-build
