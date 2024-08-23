@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /.containers/db
 /.idea/.idea.Assignment/Docker
+/.idea/.idea.Assignment/.idea
