@@ -7,43 +7,34 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  AZURE_WEBAPP_NAME: current-time-service
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+
 jobs:
-  build-and-push:
+  publish:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: 'Get the branch name'
-      id: branch-name
-      uses: tj-actions/branch-names@v5
-
-    - name: 'Set RAW_BRANCH variable'
-      run: echo "RAW_BRANCH=${{ steps.branch-name.outputs.current_branch }}" >> $GITHUB_ENV
-
-    - name: 'Checkout repo'
-      uses: actions/checkout@v2
-
-    - name: 'Sets branch-related variables'
-      run: echo "BRANCH=master" >> $GITHUB_ENV
-
-    - name: 'Set SHA variable'
-      run: echo "SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
-    - name: 'Set TAG variable'
-      run: echo "TAG=${{ env.BRANCH }}-$(date "+%Y.%m.%d")-${{ env.SHA }}" >> $GITHUB_ENV
-
-    - name: 'Login via Azure CLI'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: 'Login to Container Registry'
-      uses: azure/docker-login@v2
-      with:
-        login-server: ${{ secrets.ACR_LOGIN_SERVER }}
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
-
-    - name: 'Build and Push'
-      run: |
-        docker build -t ${{ secrets.DOCKER_REGISTRY_SERVER_URL }}/backend:${{ env.BRANCH }}-latest .
-        docker push --all-tags ${{ secrets.DOCKER_REGISTRY_SERVER_URL }}/backend
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Restore
+        run: dotnet restore ./.sln
+        
+      - name: Build
+        run: dotnet build ./Assignment.sln --configuration Debug --no-restore
+        
+      - name: Publish
+        run: dotnet publish ./Assignment.sln --configuration Debug --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
