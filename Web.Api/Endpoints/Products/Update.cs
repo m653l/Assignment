@@ -1,4 +1,4 @@
-﻿using Application.Products.Create;
+﻿using Application.Products.Update;
 using MediatR;
 using SharedKernel;
 using Web.Api.Extensions;
@@ -6,16 +6,17 @@ using Web.Api.Infrastructure;
 
 namespace Web.Api.Endpoints.Products;
 
-internal sealed class Create : IEndpoint
+internal sealed class Update : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("products", async (
-            CreateProductRequest request,
+        app.MapPut("products", async (
+            UpdateProductRequest request,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            var command = new CreateProductCommand(
+            var command = new UpdateProductCommand(
+                request.ProductId,
                 request.CategoryId,
                 request.ProductName,
                 request.ProductCode,

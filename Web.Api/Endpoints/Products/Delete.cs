@@ -1,28 +1,26 @@
-﻿using Application.Categories.Create;
+﻿using Application.Products.Delete;
 using MediatR;
 using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
-namespace Web.Api.Endpoints.Categories;
+namespace Web.Api.Endpoints.Products;
 
-internal sealed class Create : IEndpoint
+internal sealed class Delete : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("categories", async (
-            CreateCategoryRequest request,
+        app.MapDelete("products/delete", async (
+            Guid productId,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            var command = new CreateCategoryCommand(
-                request.FullName,
-                request.ShortName);
+            var command = new DeleteProductCommand(productId);
 
             Result<Guid> result = await sender.Send(command, cancellationToken);
 
             return result.Match(Results.Ok, CustomResults.Problem);
         })
-        .WithTags(Tags.Categories);
+        .WithTags(Tags.Products);
     }
 }

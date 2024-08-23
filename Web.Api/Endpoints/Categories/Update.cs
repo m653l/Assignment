@@ -1,4 +1,4 @@
-﻿using Application.Categories.Create;
+﻿using Application.Categories.Update;
 using MediatR;
 using SharedKernel;
 using Web.Api.Extensions;
@@ -6,16 +6,17 @@ using Web.Api.Infrastructure;
 
 namespace Web.Api.Endpoints.Categories;
 
-internal sealed class Create : IEndpoint
+public class Update : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("categories", async (
-            CreateCategoryRequest request,
+        app.MapPut("categories", async (
+            UpdateCategoryRequest request,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            var command = new CreateCategoryCommand(
+            var command = new UpdateCategoryCommand(
+                request.CategoryId,
                 request.FullName,
                 request.ShortName);
 

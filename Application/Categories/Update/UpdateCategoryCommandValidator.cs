@@ -1,11 +1,14 @@
 ﻿using FluentValidation;
 
-namespace Application.Categories.Create;
+namespace Application.Categories.Update;
 
-internal sealed class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
+internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
 {
-    public CreateCategoryCommandValidator()
+    public UpdateCategoryCommandValidator()
     {
+        RuleFor(c => c.CategoryId)
+            .NotEmpty().WithErrorCode(CategoryErrorCodes.CreateOrUpdateCategory.CategoryIdMissing);
+
         RuleFor(c => c.FullName)
             .NotEmpty().WithErrorCode(CategoryErrorCodes.CreateOrUpdateCategory.MissingFullName)
             .MaximumLength(200).WithErrorCode(CategoryErrorCodes.CreateOrUpdateCategory.ToLongFullName);

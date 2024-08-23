@@ -18,4 +18,10 @@ public sealed class Category : Entity
 
         return category;
     }
+
+    public void Update(string fullName, string shortName)
+    {
+        FullName = fullName;
+        ShortName = shortName;
+    }
 }

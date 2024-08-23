@@ -7,11 +7,11 @@ internal sealed class CreateProductCommandValidator : AbstractValidator<CreatePr
     public CreateProductCommandValidator()
     {
         RuleFor(c => c.ProductName)
-            .NotEmpty().WithErrorCode(ProductErrorCodes.CreateProduct.MissingProductName)
-            .MaximumLength(200).WithErrorCode(ProductErrorCodes.CreateProduct.ToLongProductName);
+            .NotEmpty().WithErrorCode(ProductErrorCodes.CreateOrUpdateProduct.MissingProductName)
+            .MaximumLength(200).WithErrorCode(ProductErrorCodes.CreateOrUpdateProduct.ToLongProductName);
 
         RuleFor(c => c.ProductCode)
-            .NotEmpty().WithErrorCode(ProductErrorCodes.CreateProduct.MissingProductCode)
-            .MaximumLength(5).WithErrorCode(ProductErrorCodes.CreateProduct.ToLongProductCode);
+            .NotEmpty().WithErrorCode(ProductErrorCodes.CreateOrUpdateProduct.MissingProductCode)
+            .MaximumLength(5).WithErrorCode(ProductErrorCodes.CreateOrUpdateProduct.ToLongProductCode);
     }
 }

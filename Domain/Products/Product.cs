@@ -14,11 +14,20 @@ public sealed class Product : Entity
         Product product = new Product()
         {
             Id = Guid.NewGuid(),
+            CategoryId = categoryId,
             ProductName = productName,
             ProductCode = productCode,
             Price = price
         };
 
         return product;
+    }
+
+    public void Update(Guid categoryId, string productName, string productCode, decimal price)
+    {
+        CategoryId = categoryId;
+        ProductName = productName;
+        ProductCode = productCode;
+        Price = price;
     }
 }
