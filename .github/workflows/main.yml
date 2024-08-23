@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '8.0.x'
           
       - name: Restore
-        run: dotnet restore ./.sln
+        run: dotnet restore ./Assignment.sln
         
       - name: Build
         run: dotnet build ./Assignment.sln --configuration Debug --no-restore
