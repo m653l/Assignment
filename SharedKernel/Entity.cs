@@ -1,4 +1,6 @@
-﻿namespace SharedKernel;
+﻿using SharedKernel.Enums;
+
+namespace SharedKernel;
 
 public abstract class Entity
 {
@@ -14,8 +16,14 @@ public abstract class Entity
     }
 
     public Guid Id { get; init; }
+    public StatusType Status { get; private set; }
 
     public List<IDomainEvent> DomainEvents => _domainEvents.ToList();
+
+    public virtual void SoftDelete()
+    {
+        Status = StatusType.Deleted;
+    }
 
     public void ClearDomainEvents()
     {

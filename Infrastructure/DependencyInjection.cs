@@ -1,6 +1,9 @@
 ﻿using Application.Abstractions.Data;
 using Dapper;
+using Domain.Categories;
+using Domain.Products;
 using Infrastructure.Database;
+using Infrastructure.Repositories;
 using Infrastructure.Time;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -46,7 +49,8 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
-        // services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICategoryRepository, CategortyRepository>();
 
         return services;
     }
