@@ -45,5 +45,5 @@ jobs:
 
     - name: 'Build and Push'
       run: |
-        docker-compose -f ./docker-compose.yml build
-        docker-compose -f ./docker-compose.yml push
+        docker build -t ${{ secrets.DOCKER_REGISTRY_SERVER_URL }}/backend:${{ env.BRANCH }}-latest .
+        docker push --all-tags ${{ secrets.DOCKER_REGISTRY_SERVER_URL }}/backend
