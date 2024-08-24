@@ -33,12 +33,13 @@ RouteGroupBuilder versionedGroup = app
 
 app.MapEndpoints(versionedGroup);
 
-if (app.Environment.IsDevelopment())
-{
+// REMARK: Only for testing
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwaggerWithUi();
 
     app.ApplyMigrations();
-}
+//}
 
 app.UseHttpsRedirection();
 
