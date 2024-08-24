@@ -59,6 +59,7 @@ The pipeline will:
 What is required:
   - App Service Web App configured with Code Publishing Model for .NET 8 (LTS)
   - The Azure Database for PostgreSQL server
+
 Configuration:
   - Allow the Basic Auth in the App Service
   - Download the publishing profile and put it in your AZURE_PUBLISH_PROFILE secret
