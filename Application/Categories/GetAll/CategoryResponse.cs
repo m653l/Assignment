@@ -1,4 +1,4 @@
-﻿namespace Application.Categories.Get;
+﻿namespace Application.Categories.GetAll;
 
 public sealed record CategoryResponse
 {

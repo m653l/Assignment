@@ -1,4 +1,4 @@
-﻿namespace Application.Products.Get;
+﻿namespace Application.Products.GetAll;
 
 public sealed record ProductResponse
 {
