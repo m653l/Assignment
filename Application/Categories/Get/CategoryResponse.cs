@@ -1,6 +1,6 @@
 ﻿namespace Application.Categories.Get;
 
-public sealed class CategoryResponse
+public sealed record CategoryResponse
 {
     public Guid Id { get; init; }
     public string FullName { get; init; }

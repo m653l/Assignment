@@ -1,6 +1,5 @@
-﻿namespace Application.Categories.GetAll;
+﻿using Application.Abstractions.Messaging;
 
-public class GetAllCategoriesQuery
-{
-    
-}
+namespace Application.Categories.GetAll;
+
+public sealed record GetAllCategoriesQuery() : IQuery<List<CategoryResponse>>;

@@ -1,6 +1,5 @@
-﻿namespace Application.Products.GetAll;
+﻿using Application.Abstractions.Messaging;
 
-public class GetAllProductsQuery
-{
-    
-}
+namespace Application.Products.GetAll;
+
+public sealed record GetAllProductsQuery() : IQuery<List<ProductResponse>>;

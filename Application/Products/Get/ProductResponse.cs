@@ -1,6 +1,6 @@
 ﻿namespace Application.Products.Get;
 
-public sealed class ProductResponse
+public sealed record ProductResponse
 {
     public Guid Id { get; init; }
     public Guid CategoryId { get; init; }
