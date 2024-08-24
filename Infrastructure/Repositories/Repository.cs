@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
+using SharedKernel.Enums;
 
 namespace Infrastructure.Repositories;
 
@@ -20,7 +21,7 @@ internal abstract class Repository<T>
     {
         return await _dbContext
             .Set<T>()
-            .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(entity => entity.Id == id && entity.Status == StatusType.Active, cancellationToken);
     }
 
     public virtual void Insert(T entity)
