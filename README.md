@@ -55,6 +55,7 @@ The pipeline will:
   - Deploy the changes to the Azure App Service
 
 ## Deploying in Azure
+### The application is currently available on: https://assigment-interview-api.azurewebsites.net/swagger/index.html
 What is required:
   - App Service Web App configured with Code Publishing Model for .NET 8 (LTS)
   - The Azure Database for PostgreSQL server
